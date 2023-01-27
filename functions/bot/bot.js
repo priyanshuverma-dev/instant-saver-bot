@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { JSDOM } = require("jsdom");
 const request = require("request");
-import fetch from "node-fetch";
+
 const { Telegraf } = require("telegraf");
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
