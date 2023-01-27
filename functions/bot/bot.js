@@ -132,7 +132,7 @@ bot.on("message", (ctx) => {
         console.log(finalUrl);
       })
       .catch(console.error);
-  }
+  }}
 if (ctx.message.text.includes("Instagram")) {
     ctx.reply("Instagram is not supported yet");
   
