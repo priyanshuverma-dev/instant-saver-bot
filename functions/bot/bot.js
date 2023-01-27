@@ -1,4 +1,8 @@
+require("dotenv").config();
 const { Telegraf } = require("telegraf");
+const request = require("request");
+const { JSDOM } = require("jsdom");
+
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.start((ctx) => {
@@ -11,17 +15,14 @@ bot.start((ctx) => {
   }
 });
 
-bot.on("message", (msg) => {
-  const chatId = msg.chat.id;
-
+bot.on("message", (ctx) => {
   // if the message is hello
-  if (msg.text.includes("hello")) {
-    bot.sendMessage(chatId, "Hello, " + msg.from.first_name);
+  if (ctx.message.text.includes("hello")) {
+    ctx.reply("Hello");
   }
-
-  // if the message is a link
-  if (msg.text.includes("pinterest")) {
-    const url = msg.text;
+  // if the message is a link of pinterest
+  if (ctx.message.text.includes("pinterest.com")) {
+    const url = ctx.message.text;
     try {
       request(url, function (error, response, body) {
         // getting all the data from the page
@@ -34,13 +35,12 @@ bot.on("message", (msg) => {
         addinQuality = video.replace("/hls/", "/720p/");
         outUrl = addinQuality.replace(".m3u8", ".mp4");
         console.log(outUrl);
-        return outUrl;
+        ctx.sendVideo(outUrl);
       });
     } catch (err) {
-      bot.sendMessage(chatId, "Something went wrong :(");
+      ctx.reply("Something went wrong :(");
       console.log(err);
     }
-    bot.sendVideo(chatId, outUrl);
   }
 });
 
@@ -57,3 +57,6 @@ exports.handler = async (event) => {
     };
   }
 };
+bot.launch();
+process.once("SIGINT", () => bot.stop("SIGINT"));
+process.once("SIGTERM", () => bot.stop("SIGTERM"));

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/priyanshu-creator/instant-saver-bot#readme",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "jsdom": "^21.1.0",
     "netlify-lambda": "^2.0.15",
     "request": "^2.88.2",
