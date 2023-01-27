@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { JSDOM } = require("jsdom");
 const request = require("request");
-const fetch = require("cross-fetch");
+require("isomorphic-fetch");
 const { Telegraf } = require("telegraf");
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -133,6 +133,9 @@ bot.on("message", (ctx) => {
       })
       .catch(console.error);
   }
+if (ctx.message.text.includes("Instagram")) {
+    ctx.reply("Instagram is not supported yet");
+  
 });
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 exports.handler = async (event) => {
