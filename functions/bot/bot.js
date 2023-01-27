@@ -116,7 +116,7 @@ bot.on("message", (ctx) => {
     }
   }
   // if the message is a link of youtube
-  if (ctx.message.includes("youtu.be")) {
+  if (ctx.message.text.includes("youtu.be")) {
     ctx.reply("Youtube is not supported yet");
   }
 });
