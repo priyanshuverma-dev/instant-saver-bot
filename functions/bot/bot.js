@@ -64,7 +64,7 @@ bot.on("message", (ctx) => {
   // if the message is a link of pinterest
   if (ctx.message.text.includes("pinterest.com")) {
     try {
-      request(long_url, function (error, response, body) {
+      request(url, function (error, response, body) {
         // getting all the data from the page
         data = body;
         const dom = new JSDOM(data);
