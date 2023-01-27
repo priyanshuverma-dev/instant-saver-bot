@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { JSDOM } = require("jsdom");
 const request = require("request");
-
+const fetch = require("node-fetch");
 const { Telegraf } = require("telegraf");
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -116,8 +116,22 @@ bot.on("message", (ctx) => {
     }
   }
   // if the message is a link of youtube
-  if (ctx.message.includes("youtu.be")) {
+  if (ctx.message.text.includes("youtu.be")) {
     ctx.reply("Youtube is not supported yet");
+    fetch(url)
+      .then((r) => {
+        if (!r.ok) {
+          throw new Error(`HTTP error ${r.status}`);
+        }
+        const url = r.url;
+        const uri = new URL(url);
+        uri.searchParams.delete("feature");
+        const path = uri.pathname;
+        console.log(uri);
+        const finalUrl = "https://" + uri.hostname + path + uri.search;
+        console.log(finalUrl);
+      })
+      .catch(console.error);
   }
 });
 bot.launch();
