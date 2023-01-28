@@ -1,11 +1,13 @@
-require("dotenv").config();
-const { JSDOM } = require("jsdom");
-const request = require("request");
-require("isomorphic-fetch");
-const { Telegraf } = require("telegraf");
+// require("dotenv").config();
+import * as dotenv from "dotenv";
+import { JSDOM } from "jsdom";
+import { Telegraf } from "telegraf";
+import fetch from "node-fetch";
+
+dotenv.config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
-
+const API_URL = "https://priyanshu-vid-api.onrender.com";
 // command Start
 bot.start((ctx) => {
   console.log("Received /start command");
@@ -64,18 +66,17 @@ bot.on("message", (ctx) => {
   // if the message is a link of pinterest
   if (ctx.message.text.includes("pinterest.com")) {
     try {
-      request(url, function (error, response, body) {
-        // getting all the data from the page
-        data = body;
-        const dom = new JSDOM(data);
-        const document = dom.window.document;
-        // selecting the video tag
-        const video = document.getElementsByTagName("video")[0].src;
-        // modifying the url to get the 720p video
-        addinQuality = video.replace("/hls/", "/720p/");
-        outUrl = addinQuality.replace(".m3u8", ".mp4");
-        console.log(outUrl);
-        ctx.sendVideo(outUrl);
+      ctx.reply("Please wait...");
+      fetch(`${API_URL}/pinterest?url=${url}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        res.json().then((data) => {
+          const urlVideo = data.url;
+          ctx.sendVideo(urlVideo);
+        });
       });
     } catch (err) {
       ctx.reply("Something went wrong :(");
@@ -85,31 +86,19 @@ bot.on("message", (ctx) => {
   // if the message is a link of pinterest shorten
   if (ctx.message.text.includes("pin.it")) {
     try {
-      fetch(url)
-        .then((r) => {
-          if (!r.ok) {
-            throw new Error(`HTTP error ${r.status}`);
-          }
-          const url = r.url;
-          const uri = new URL(url);
-          uri.searchParams.delete("invite_code");
-          uri.searchParams.delete("sender");
-          uri.searchParams.delete("sfo");
-          uri.pathname = uri.pathname.replace("/sent/", "");
-          const path = uri.pathname;
-          const finalUrl = "https://" + uri.hostname + path;
-          console.log(finalUrl);
-          request(finalUrl, function (error, response, body) {
-            const dom = new JSDOM(body);
-            const document = dom.window.document;
-            const video = document.getElementsByTagName("video")[0].src;
-            addinQuality = video.replace("/hls/", "/720p/");
-            outUrl = addinQuality.replace(".m3u8", ".mp4");
-            console.log(outUrl);
-            ctx.sendVideo(outUrl);
-          });
-        })
-        .catch(console.error);
+      ctx.reply("Please wait...");
+
+      fetch(`${API_URL}/pinterest?url=${url}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        res.json().then((data) => {
+          const urlVideo = data.url;
+          ctx.sendVideo(urlVideo);
+        });
+      });
     } catch (err) {
       ctx.reply("Something went wrong :(");
       console.log(err);
@@ -137,9 +126,8 @@ bot.on("message", (ctx) => {
     ctx.reply("Instagram is not supported yet");
   }
 });
-
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
-exports.handler = async (event) => {
+export async function handler(event) {
   try {
     await bot.handleUpdate(JSON.parse(event.body));
     return { statusCode: 200, body: "" };
@@ -150,4 +138,4 @@ exports.handler = async (event) => {
       body: "This endpoint is meant for bot and telegram communication",
     };
   }
-};
+}
