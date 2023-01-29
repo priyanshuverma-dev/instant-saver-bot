@@ -2,7 +2,7 @@
 // import fetch from "node-fetch";
 // import { Telegraf } from "telegraf";
 // import * as dotenv from "dotenv";
-import("node-fetch");
+fetch = import("node-fetch");
 const { Telegraf } = require("telegraf");
 require("dotenv").config();
 // fetch = require("node-fetch");
