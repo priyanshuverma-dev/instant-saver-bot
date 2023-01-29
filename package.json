@@ -2,7 +2,7 @@
   "name": "telegram-bots",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "server": "nodemon functions/bot/bot.js"
