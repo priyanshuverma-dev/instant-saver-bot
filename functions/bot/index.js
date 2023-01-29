@@ -129,7 +129,7 @@ bot.on("message", (ctx) => {
     ctx.reply("Instagram is not supported yet");
   }
 });
-bot.launch();
+// bot.launch();
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 exports.handler = async function (event) {
   try {
