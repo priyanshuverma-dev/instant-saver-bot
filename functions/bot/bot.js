@@ -110,7 +110,7 @@ bot.on("message", (ctx) => {
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 exports.handler = async function (event) {
   try {
-    await bot.handleUpdate(JSON.parse(event.body));
+    await bot.handleUpdate(event.body);
     return { statusCode: 200, body: "" };
   } catch (e) {
     console.error("error in handler:", e);
