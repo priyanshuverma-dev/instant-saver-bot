@@ -2,10 +2,10 @@
   "name": "telegram-bots",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "bot.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon bot.js"
   },
   "repository": {
     "type": "git",
@@ -20,9 +20,8 @@
   "homepage": "https://github.com/priyanshu-creator/instant-saver-bot#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
-    "jsdom": "^21.1.0",
-    "netlify-lambda": "^2.0.15",
     "node-fetch": "^3.3.0",
+    "nodemon": "^2.0.20",
     "telegraf": "^4.11.2"
   }
 }
