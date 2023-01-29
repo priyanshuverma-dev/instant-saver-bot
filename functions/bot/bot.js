@@ -5,8 +5,8 @@
 
 const { Telegraf } = require("telegraf");
 require("dotenv").config();
+const axios = require("axios");
 // fetch = require("node-fetch");
-const fetch = import("node-fetch");
 
 // dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -70,17 +70,27 @@ bot.on("message", (ctx) => {
   if (ctx.message.text.includes("pinterest.com")) {
     try {
       ctx.reply("Please wait...");
-      fetch(`${API_URL}/pinterest?url=${url}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        res.json().then((data) => {
-          const urlVideo = data.url;
+      axios
+        .get(`${API_URL}/pinterest?url=${url}`)
+        .then(function (res) {
+          const vid = res.data.url;
           ctx.sendVideo(urlVideo);
+        })
+        .catch(function (error) {
+          console.log(error);
+          ctx.reply("request Error try again !!");
         });
-      });
+      // fetch(`${API_URL}/pinterest?url=${url}`, {
+      //   method: "GET",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // }).then((res) => {
+      //   res.json().then((data) => {
+      //     const urlVideo = data.url;
+      //     ctx.sendVideo(urlVideo);
+      //   });
+      // });
     } catch (err) {
       ctx.reply("Something went wrong :(");
       console.log(err);
@@ -90,18 +100,27 @@ bot.on("message", (ctx) => {
   if (ctx.message.text.includes("pin.it")) {
     try {
       ctx.reply("Please wait...");
-
-      fetch(`${API_URL}/pinterest?url=${url}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        res.json().then((data) => {
-          const urlVideo = data.url;
+      axios
+        .get(`${API_URL}/pinterest?url=${url}`)
+        .then(function (res) {
+          const vid = res.data.url;
           ctx.sendVideo(urlVideo);
+        })
+        .catch(function (error) {
+          console.log(error);
+          ctx.reply("request Error try again !!");
         });
-      });
+      // fetch(`${API_URL}/pinterest?url=${url}`, {
+      //   method: "GET",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // }).then((res) => {
+      //   res.json().then((data) => {
+      //     const urlVideo = data.url;
+      //     ctx.sendVideo(urlVideo);
+      //   });
+      // });
     } catch (err) {
       ctx.reply("Something went wrong :(");
       console.log(err);
@@ -129,21 +148,9 @@ bot.on("message", (ctx) => {
     ctx.reply("Instagram is not supported yet");
   }
 });
-// bot.launch();
+bot.launch();
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
-exports.handler = async function (event) {
-  try {
-    await bot.handleUpdate(JSON.parse(event.body));
-    return { statusCode: 200, body: "" };
-  } catch (e) {
-    console.error("error in handler:", e);
-    return {
-      statusCode: 400,
-      body: "This endpoint is meant for bot and telegram communication",
-    };
-  }
-};
-// export async function handler(event) {
+// exports.handler = async function (event) {
 //   try {
 //     await bot.handleUpdate(JSON.parse(event.body));
 //     return { statusCode: 200, body: "" };
@@ -154,4 +161,16 @@ exports.handler = async function (event) {
 //       body: "This endpoint is meant for bot and telegram communication",
 //     };
 //   }
-// }
+// };
+export async function handler(event) {
+  try {
+    await bot.handleUpdate(JSON.parse(event.body));
+    return { statusCode: 200, body: "" };
+  } catch (e) {
+    console.error("error in handler:", e);
+    return {
+      statusCode: 400,
+      body: "This endpoint is meant for bot and telegram communication",
+    };
+  }
+}

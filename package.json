@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon functions/bot/index.js"
+    "server": "nodemon functions/bot/bot.js"
   },
   "repository": {
     "type": "git",
@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/priyanshu-creator/instant-saver-bot#readme",
   "dependencies": {
+    "axios": "^1.2.6",
     "dotenv": "^16.0.3",
     "netlify-lambda": "^2.0.15",
-    "node-fetch": "^3.3.0",
     "nodemon": "^2.0.20",
     "telegraf": "^4.11.2"
   }
