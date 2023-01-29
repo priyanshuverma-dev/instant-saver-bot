@@ -2,12 +2,12 @@
 // import fetch from "node-fetch";
 // import { Telegraf } from "telegraf";
 // import * as dotenv from "dotenv";
-
+import("node-fetch");
 const { Telegraf } = require("telegraf");
 require("dotenv").config();
-fetch = require("node-fetch");
+// fetch = require("node-fetch");
 
-dotenv.config();
+// dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const API_URL = "https://priyanshu-vid-api.onrender.com";
 // command Start
