@@ -1,5 +1,5 @@
-// require("dotenv").config();
-dotenv = require("dotenv");
+require("dotenv").config();
+// dotenv = require("dotenv");
 // import fetch from "node-fetch";
 // import { Telegraf } from "telegraf";
 const { Telegraf } = require("telegraf");
