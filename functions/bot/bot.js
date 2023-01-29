@@ -68,7 +68,7 @@ bot.on("message", (ctx) => {
         .get(`${API_URL}/pinterest?url=${url}`)
         .then(function (res) {
           const vid = res.data.url;
-          ctx.sendVideo(urlVideo);
+          ctx.sendVideo(vid);
         })
         .catch(function (error) {
           console.log(error);
@@ -87,7 +87,7 @@ bot.on("message", (ctx) => {
         .get(`${API_URL}/pinterest?url=${url}`)
         .then(function (res) {
           const vid = res.data.url;
-          ctx.sendVideo(urlVideo);
+          ctx.sendVideo(vid);
         })
         .catch(function (error) {
           console.log(error);
