@@ -7,6 +7,7 @@ const { Telegraf } = require("telegraf");
 
 dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
+const API_URL = "https://priyanshu-vid-api.onrender.com";
 // command Start
 bot.start((ctx) => {
   console.log("Received /start command");
