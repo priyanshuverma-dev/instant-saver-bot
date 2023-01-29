@@ -1,13 +1,12 @@
 // const dotenv = require("dotenv");
-const axios = require("axios");
+// const axios = require("axios");
 // const { Telegraf } = require("telegraf");
 import * as dotenv from "dotenv";
-// import axios from "axios";
+import axios from "axios";
 import { Telegraf } from "telegraf";
 
 dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
-const API_URL = "https://priyanshu-vid-api.onrender.com";
 // command Start
 bot.start((ctx) => {
   console.log("Received /start command");
@@ -109,7 +108,7 @@ bot.on("message", (ctx) => {
     ctx.reply("Instagram is not supported yet");
   }
 });
-// bot.launch();
+
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 // exports.handler = async function (event) {
 //   try {
