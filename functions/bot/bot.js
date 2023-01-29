@@ -1,7 +1,3 @@
-// dotenv = require("dotenv");
-// import fetch from "node-fetch";
-// import { Telegraf } from "telegraf";
-// import * as dotenv from "dotenv";
 
 const { Telegraf } = require("telegraf");
 require("dotenv").config();
@@ -74,7 +70,7 @@ bot.on("message", (ctx) => {
         .get(`${API_URL}/pinterest?url=${url}`)
         .then(function (res) {
           const vid = res.data.url;
-          ctx.sendVideo(urlVideo);
+          ctx.sendVideo(vid);
         })
         .catch(function (error) {
           console.log(error);
@@ -104,7 +100,7 @@ bot.on("message", (ctx) => {
         .get(`${API_URL}/pinterest?url=${url}`)
         .then(function (res) {
           const vid = res.data.url;
-          ctx.sendVideo(urlVideo);
+          ctx.sendVideo(vid);
         })
         .catch(function (error) {
           console.log(error);
