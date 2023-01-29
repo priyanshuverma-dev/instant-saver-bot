@@ -1,6 +1,6 @@
-const { Telegraf } = require("telegraf");
 const dotenv = require("dotenv");
 const axios = require("axios");
+const { Telegraf } = require("telegraf");
 
 dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -101,26 +101,12 @@ bot.on("message", (ctx) => {
   // if the message is a link of youtube
   if (ctx.message.text.includes("youtu.be")) {
     ctx.reply("Youtube is not supported yet");
-    fetch(url)
-      .then((r) => {
-        if (!r.ok) {
-          throw new Error(`HTTP error ${r.status}`);
-        }
-        const url = r.url;
-        const uri = new URL(url);
-        uri.searchParams.delete("feature");
-        const path = uri.pathname;
-        console.log(uri);
-        const finalUrl = "https://" + uri.hostname + path + uri.search;
-        console.log(finalUrl);
-      })
-      .catch(console.error);
   }
   if (ctx.message.text.includes("Instagram")) {
     ctx.reply("Instagram is not supported yet");
   }
 });
-bot.launch();
+// bot.launch();
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 exports.handler = async function handler(event) {
   try {
