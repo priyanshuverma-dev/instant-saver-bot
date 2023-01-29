@@ -129,7 +129,7 @@ bot.on("message", (ctx) => {
 });
 
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
-export async function handler(event) {
+module.exports = async function handler(event) {
   try {
     await bot.handleUpdate(JSON.parse(event.body));
     return { statusCode: 200, body: "" };
@@ -140,4 +140,4 @@ export async function handler(event) {
       body: "This endpoint is meant for bot and telegram communication",
     };
   }
-}
+};
