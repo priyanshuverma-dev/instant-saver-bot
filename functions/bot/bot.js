@@ -1,8 +1,11 @@
 // require("dotenv").config();
-import * as dotenv from "dotenv";
-import { Telegraf } from "telegraf";
-import fetch from "node-fetch";
+dotenv = require("dotenv");
+// import fetch from "node-fetch";
+// import { Telegraf } from "telegraf";
+const { Telegraf } = require("telegraf");
 
+// import fetch from "node-fetch";
+fetch = require("node-fetch");
 dotenv.config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -125,17 +128,17 @@ bot.on("message", (ctx) => {
     ctx.reply("Instagram is not supported yet");
   }
 });
-bot.launch();
+
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
-// export async function handler(event) {
-//   try {
-//     await bot.handleUpdate(JSON.parse(event.body));
-//     return { statusCode: 200, body: "" };
-//   } catch (e) {
-//     console.error("error in handler:", e);
-//     return {
-//       statusCode: 400,
-//       body: "This endpoint is meant for bot and telegram communication",
-//     };
-//   }
-// }
+export async function handler(event) {
+  try {
+    await bot.handleUpdate(JSON.parse(event.body));
+    return { statusCode: 200, body: "" };
+  } catch (e) {
+    console.error("error in handler:", e);
+    return {
+      statusCode: 400,
+      body: "This endpoint is meant for bot and telegram communication",
+    };
+  }
+}
