@@ -2,10 +2,11 @@
 // import fetch from "node-fetch";
 // import { Telegraf } from "telegraf";
 // import * as dotenv from "dotenv";
-fetch = import("node-fetch");
+
 const { Telegraf } = require("telegraf");
 require("dotenv").config();
 // fetch = require("node-fetch");
+const fetch = import("node-fetch");
 
 // dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -128,7 +129,7 @@ bot.on("message", (ctx) => {
     ctx.reply("Instagram is not supported yet");
   }
 });
-
+bot.launch();
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
 exports.handler = async function (event) {
   try {
