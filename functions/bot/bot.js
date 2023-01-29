@@ -3,7 +3,7 @@
 // import { Telegraf } from "telegraf";
 // import * as dotenv from "dotenv";
 
-const { Telegraf } = require("telegraf");
+const Telegraf = require("telegraf");
 require("dotenv").config();
 const axios = require("axios");
 // fetch = require("node-fetch");
