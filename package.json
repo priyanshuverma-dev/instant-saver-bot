@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "bot.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "server": "nodemon bot.js"
   },
