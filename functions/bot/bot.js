@@ -54,7 +54,7 @@ bot.command("/contact", (ctx) => {
   }
 });
 
-bot.on("message", (ctx) => {
+bot.on("message", async (ctx) => {
   const url = ctx.message.text;
   // if the message is hello
   if (ctx.message.text.indexOf("Hello") > -1) {
@@ -82,18 +82,21 @@ bot.on("message", (ctx) => {
   if (ctx.message.text.indexOf("pinterest.com") > -1) {
     try {
       ctx.reply("Please wait...");
-      axios
-        .get(`${API_URL}/pinterest?url=${url}`)
-        .then(function (res) {
-          const vid = res.data.url;
-          ctx.sendVideo(vid);
-        })
-        .catch(function (error) {
-          console.log(error);
-          ctx.reply("request Error try again !!");
-        });
+      const { data: res } = await axios.get(`${API_URL}/pinterest?url=${url}`);
+      const vid = res.url;
+      ctx.sendVideo(vid);
+      // axios
+      //   .get(`${API_URL}/pinterest?url=${url}`)
+      //   .then(function (res) {
+      //     const vid = res.data.url;
+      //     ctx.sendVideo(vid);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //     ctx.reply("request Error try again !!");
+      //   });
     } catch (err) {
-      ctx.reply("Something went wrong :(");
+      ctx.reply("Something went wrong :(.\n\n Try again.");
       console.log(err);
     }
   }
@@ -101,18 +104,21 @@ bot.on("message", (ctx) => {
   if (ctx.message.text.indexOf("pin.it") > -1) {
     try {
       ctx.reply("Please wait...");
-      axios
-        .get(`${API_URL}/pinterest?url=${url}`)
-        .then(function (res) {
-          const vid = res.data.url;
-          ctx.sendVideo(vid);
-        })
-        .catch(function (error) {
-          console.log(error);
-          ctx.reply("request Error try again !!");
-        });
+      const { data: res } = await axios.get(`${API_URL}/pinterest?url=${url}`);
+      const vid = res.url;
+      ctx.sendVideo(vid);
+      // axios
+      //   .get(`${API_URL}/pinterest?url=${url}`)
+      //   .then(function (res) {
+      //     const vid = res.data.url;
+      //     ctx.sendVideo(vid);
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //     ctx.reply("request Error try again !!");
+      //   });
     } catch (err) {
-      ctx.reply("Something went wrong :(");
+      ctx.reply("Something went wrong :(.\n\n Try again.");
       console.log(err);
     }
   }
