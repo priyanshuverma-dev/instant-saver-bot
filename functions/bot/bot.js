@@ -84,7 +84,7 @@ bot.on("message", async (ctx) => {
       ctx.reply("Please wait...");
       const { data: res } = await axios.get(`${API_URL}/pinterest?url=${url}`);
       const vid = res.url;
-      ctx.sendVideo(vid);
+      ctx.replyWithVideo(vid);
     } catch (err) {
       ctx.reply("Something went wrong :(.\n\n Try again.");
       console.log(err);
@@ -107,7 +107,7 @@ bot.on("message", async (ctx) => {
   if (ctx.message.text.indexOf("youtube") > -1) {
     ctx.reply("Youtube is not supported yet");
   }
-  if (ctx.message.text.indexOf("Instagram") > -1) {
+  if (ctx.message.text.indexOf("instagram") > -1) {
     ctx.reply("Instagram is not supported yet");
   }
 });
