@@ -60,7 +60,7 @@ bot.command("/contact", (ctx) => {
 bot.on("message", (ctx) => {
   const url = ctx.message.text;
   // if the message is hello
-  if (ctx.message.text.includes("hello")) {
+  if (ctx.message.text.includes("Hello")) {
     ctx.reply("Hello");
   }
   // if the message is a link of pinterest
@@ -107,7 +107,8 @@ bot.on("message", (ctx) => {
   }
   if (ctx.message.text.includes("Instagram")) {
     ctx.reply("Instagram is not supported yet");
-  }
+  )
+else{ctx.reply("Can't understand")}
 });
 // bot.launch();
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
