@@ -1,9 +1,6 @@
 const dotenv = require("dotenv");
 const axios = require("axios");
 const { Telegraf } = require("telegraf");
-// import * as dotenv from "dotenv";
-// import axios from "axios";
-// import { Telegraf } from "telegraf";
 
 dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -60,11 +57,29 @@ bot.command("/contact", (ctx) => {
 bot.on("message", (ctx) => {
   const url = ctx.message.text;
   // if the message is hello
-  if (ctx.message.text.includes("Hello")) {
+  if (ctx.message.text.indexOf("Hello") > -1) {
     ctx.reply("Hello");
   }
+  if (
+    ctx.message.text.indexOf("platforms") > -1 ||
+    ctx.message.text.indexOf("Platform") > -1
+  ) {
+    ctx.sendMessage(
+      "Currently supported platforms are:" +
+        " \n\n" +
+        "Pinterest: https://www.pinterest.com" +
+        " \n\n" +
+        "Pinterest Shorten: https://pin.it" +
+        " \n\n" +
+        "YouTube: https://www.youtube.com (soon)" +
+        "\n\n" +
+        "Instagram: https://www.instagram.com (soon)" +
+        "\n\n"
+    );
+  }
+
   // if the message is a link of pinterest
-  if (ctx.message.text.includes("pinterest.com")) {
+  if (ctx.message.text.indexOf("pinterest.com") > -1) {
     try {
       ctx.reply("Please wait...");
       axios
@@ -83,7 +98,7 @@ bot.on("message", (ctx) => {
     }
   }
   // if the message is a link of pinterest shorten
-  if (ctx.message.text.includes("pin.it")) {
+  if (ctx.message.text.indexOf("pin.it") > -1) {
     try {
       ctx.reply("Please wait...");
       axios
@@ -102,14 +117,11 @@ bot.on("message", (ctx) => {
     }
   }
   // if the message is a link of youtube
-  if (ctx.message.text.includes("youtu.be")) {
+  if (ctx.message.text.indexOf("youtube") > -1) {
     ctx.reply("Youtube is not supported yet");
   }
-  if (ctx.message.text.includes("Instagram")) {
+  if (ctx.message.text.indexOf("Instagram") > -1) {
     ctx.reply("Instagram is not supported yet");
-  }
-  else {
-    ctx.reply("Can't understand")
   }
 });
 // bot.launch();
@@ -126,15 +138,3 @@ exports.handler = async (event) => {
     };
   }
 };
-// export async function handler(event) {
-//   try {
-//     await bot.handleUpdate(JSON.parse(event.body));
-//     return { statusCode: 200, body: "" };
-//   } catch (e) {
-//     console.error("error in handler:", e);
-//     return {
-//       statusCode: 400,
-//       body: "This endpoint is meant for bot and telegram communication",
-//     };
-//   }
-// }
