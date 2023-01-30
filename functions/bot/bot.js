@@ -107,8 +107,10 @@ bot.on("message", (ctx) => {
   }
   if (ctx.message.text.includes("Instagram")) {
     ctx.reply("Instagram is not supported yet");
-  )
-else{ctx.reply("Can't understand")}
+  }
+  else {
+    ctx.reply("Can't understand")
+  }
 });
 // bot.launch();
 // AWS event handler syntax (https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
