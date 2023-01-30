@@ -73,7 +73,7 @@ bot.on("message", async (ctx) => {
         " \n\n" +
         "YouTube: https://www.youtube.com (soon)" +
         "\n\n" +
-        "Instagram: https://www.instagram.com (soon)" +
+        "Instagram: https://www.instagram.com" +
         "\n\n"
     );
   }
@@ -96,7 +96,6 @@ bot.on("message", async (ctx) => {
       ctx.reply("Please wait...");
       const { data: res } = await axios.get(`${API_URL}/pinterest?url=${url}`);
       const vid = res.url;
-      // ctx.sendVideo(vid);
       ctx.replyWithVideo(vid);
     } catch (err) {
       ctx.reply("Something went wrong :(.\n\n Try again.");
@@ -108,7 +107,15 @@ bot.on("message", async (ctx) => {
     ctx.reply("Youtube is not supported yet");
   }
   if (ctx.message.text.indexOf("instagram") > -1) {
-    ctx.reply("Instagram is not supported yet");
+    try {
+      ctx.reply("Please wait...");
+      const { data: res } = await axios.get(`${API_URL}/instagram?url=${url}`);
+      const media = res.url;
+      ctx.replyWithDocument(media);
+    } catch (err) {
+      ctx.reply("Something went wrong :(.\n\n Try again.");
+      console.log(err);
+    }
   }
 });
 // bot.launch();
